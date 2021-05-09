@@ -25,4 +25,10 @@ public class Account {
         this.balance = balance;
         this.userID = userID;
     }
+
+    public Account(ACCOUNT_TYPE account_type, Long balance, Long userID) {
+        this.account_type = account_type;
+        this.balance = balance;
+        this.userID = userID;
+    }
 }
