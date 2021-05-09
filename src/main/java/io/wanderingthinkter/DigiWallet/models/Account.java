@@ -19,17 +19,6 @@ public class Account {
     private Long balance;
     private Long userID;
 
-    @OneToOne(mappedBy = "AppUser")
-    private AppUser appUser;
-
-    public Account(Long id, ACCOUNT_TYPE account_type, Long balance, Long userID, AppUser appUser) {
-        this.id = id;
-        this.account_type = account_type;
-        this.balance = balance;
-        this.userID = userID;
-        this.appUser = appUser;
-    }
-
     public Account(Long id, ACCOUNT_TYPE account_type, Long balance, Long userID) {
         this.id = id;
         this.account_type = account_type;
