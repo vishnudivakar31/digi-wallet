@@ -66,10 +66,11 @@ public class TransactionService {
         Optional<Transaction> optionalTransaction = transactionRepository.findById(transactionID);
         if (optionalTransaction.isPresent()) {
             Transaction transaction = optionalTransaction.get();
-            if (transaction.getSenderID() != userID) {
-                throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "transaction is not owned by user");
+            if (transaction.getSenderID() != userID || transaction.getTransaction_status() == TRANSACTION_STATUS.CANCELLED) {
+                throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "transaction is not owned by user or transaction is already cancelled");
             }
             transaction.setTransaction_status(TRANSACTION_STATUS.CANCELLED);
+            transaction.setUpdatedDate(new Date());
             return transactionRepository.save(transaction);
         } else {
             throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "transaction not found");
