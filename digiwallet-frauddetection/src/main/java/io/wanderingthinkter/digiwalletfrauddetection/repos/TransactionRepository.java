@@ -1,6 +1,7 @@
-package io.wanderingthinkter.DigiWallet.repos;
+package io.wanderingthinkter.digiwalletfrauddetection.repos;
 
-import io.wanderingthinkter.DigiWallet.models.Transaction;
+
+import io.wanderingthinkter.digiwalletfrauddetection.models.Transaction;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
