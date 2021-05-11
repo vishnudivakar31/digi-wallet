@@ -27,7 +27,7 @@ public class KafkaConsumer {
     @Autowired
     private GeoDistanceCalculator geoDistanceCalculator;
 
-    @KafkaListener(topics = "transaction")
+    @KafkaListener(topics = "${kafka.topicName}")
     public void listenToTransaction(String transactionJson) throws JsonProcessingException {
         ObjectMapper objectMapper = new ObjectMapper();
         Transaction transaction = objectMapper.readValue(transactionJson, Transaction.class);

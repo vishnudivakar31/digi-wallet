@@ -76,4 +76,16 @@ public class TransactionService {
             throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "transaction not found");
         }
     }
+
+    public List<Transaction> getAllPendingTransactions() {
+        return transactionRepository.findAllPendingTransactions(TRANSACTION_STATUS.PENDING.ordinal(), TRANSACTION_STATUS.FRAUD_DETECTED.ordinal());
+    }
+
+    public void updateTransaction(Transaction transaction) {
+        transactionRepository.save(transaction);
+    }
+
+    public Optional<Account> getAccountByUserID(Long id) {
+        return accountRepository.findByUserID(id);
+    }
 }

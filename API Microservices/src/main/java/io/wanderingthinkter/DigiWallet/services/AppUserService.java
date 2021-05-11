@@ -2,7 +2,6 @@ package io.wanderingthinkter.DigiWallet.services;
 
 import io.wanderingthinkter.DigiWallet.models.AppUser;
 import io.wanderingthinkter.DigiWallet.repos.AppUserRepository;
-import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.userdetails.User;
@@ -10,7 +9,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.HttpStatusCodeException;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.security.Principal;
@@ -48,5 +46,9 @@ public class AppUserService implements UserDetailsService {
     public Optional<AppUser> findByPrincipal(Principal principal) {
         String username = principal.getName();
         return appUserRepository.findByUsername(username);
+    }
+
+    public Optional<AppUser> findUserByID(Long userID) {
+        return appUserRepository.findById(userID);
     }
 }

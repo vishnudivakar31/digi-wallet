@@ -25,6 +25,22 @@ public class TransactionController {
     @Autowired
     private AppUserService appUserService;
 
+    @GetMapping("/balance")
+    public Account getBalance(Principal principal) {
+        Optional<AppUser> optionalAppUser = appUserService.findByPrincipal(principal);
+        if (optionalAppUser.isPresent()) {
+            AppUser appUser = optionalAppUser.get();
+            Optional<Account> optionalAccount = transactionService.getAccountByUserID(appUser.getId());
+            if (optionalAccount.isPresent()) {
+                return optionalAccount.get();
+            } else {
+                throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "account not found");
+            }
+        } else {
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "user not found");
+        }
+    }
+
     @PostMapping("/create_account")
     public Account createAccount(@RequestParam ACCOUNT_TYPE account_type, Principal principal) {
         Optional<AppUser> optionalAppUser = appUserService.findByPrincipal(principal);
