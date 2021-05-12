@@ -49,6 +49,7 @@ export default function Login() {
                     className='textfield'
                     inputRef={passwordRef}
                     error={passwordErrorStatus}
+                    type='password'
                 />
                 <Button variant="contained" color="primary" onClick={onLogin}>
                     Login
