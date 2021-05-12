@@ -1,11 +1,17 @@
 import React, {Component} from 'react'
+import Box from '@material-ui/core/Box'
+import Login from '../components/Login'
+import CreateAccount from '../components/CreateAccount'
+import './signup.css'
 
 class SignUp extends Component {
     render() {
         return(
-            <div>
-                <h1>SignUp</h1>
-            </div>
+            <Box className='sign-up'>
+                <h1>DigiWallet</h1>
+                <Login />
+                <CreateAccount />
+            </Box>
         )
     }
 }

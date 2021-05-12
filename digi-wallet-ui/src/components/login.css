@@ -1,0 +1,17 @@
+.login {
+    border: 2px solid #192a56;
+    padding-left: 1%;
+    padding-right: 1%;
+    padding-bottom: 1%;
+    border-radius: 15px;
+}
+
+.login .input-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.login .input-container .textfield {
+    margin-right: 2%;
+}

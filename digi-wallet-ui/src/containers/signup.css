@@ -1,0 +1,15 @@
+.sign-up {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    flex-direction: column;
+    color: #192a56;
+    background: #dcdde1;
+}
+
+.sign-up h1 {
+    font-family: fantasy;
+    font-size: xxx-large;
+}
+
