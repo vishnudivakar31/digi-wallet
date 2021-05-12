@@ -8,7 +8,7 @@ export default function CreateAccount() {
     return (
         <Box className='create-account'>
             <h2>Create Account</h2>
-            <Box>
+            <Box className='input-container'>
                 <TextField 
                     label="Username" 
                     variant="outlined"
@@ -17,7 +17,7 @@ export default function CreateAccount() {
                 />
             </Box>
             
-            <Box>
+            <Box className='input-container'>
                 <TextField 
                     label="Email" 
                     variant="outlined"
@@ -26,7 +26,7 @@ export default function CreateAccount() {
                 />
             </Box>
             
-            <Box>
+            <Box className='input-container'>
                 <TextField 
                     label="Password" 
                     variant="outlined"
@@ -35,7 +35,7 @@ export default function CreateAccount() {
                 />
             </Box>
             
-            <Box>
+            <Box className='input-container'>
                 <TextField 
                     label="Confirm Password" 
                     variant="outlined"

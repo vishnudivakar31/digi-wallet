@@ -7,7 +7,10 @@
     margin-top: 2%;
 }
 
-.text-field {
+.create-account .input-container {
     margin-bottom: 2%;
+}
+
+.text-field {
     width: 25vw;
 }
