@@ -18,6 +18,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/transaction")
+@CrossOrigin(origins = "http://localhost:3000")
 public class TransactionController {
     @Autowired
     private TransactionService transactionService;

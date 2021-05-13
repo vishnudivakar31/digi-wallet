@@ -17,6 +17,7 @@ export default function Login(props) {
             const username = userNameRef.current.value
             const password = passwordRef.current.value
             props.onLogin(username, password)
+            setSafeToLogin(false)
         }
     })
 
