@@ -1,31 +1,44 @@
-import React, { useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import TextField from '@material-ui/core/TextField'
 import Button from '@material-ui/core/Button'
 import Box from '@material-ui/core/Box'
 import './login.css'
 
-export default function Login() {
+export default function Login(props) {
     const [userNameErrorStatus, setUserNameStatus] = useState(false)
     const [passwordErrorStatus, setPasswordStatus] = useState(false)
+    const [safeToLogin, setSafeToLogin] = useState(false)
 
     const userNameRef = useRef()
     const passwordRef = useRef()
 
+    useEffect(() => {
+        if (safeToLogin) {
+            const username = userNameRef.current.value
+            const password = passwordRef.current.value
+            props.onLogin(username, password)
+        }
+    })
+
     function onLogin() {
+        let safeToLogin = true
         const username = userNameRef.current.value
         const password = passwordRef.current.value
 
         if (username.length === 0) {
             setUserNameStatus(true)
+            safeToLogin = safeToLogin && false
         } else {
             setUserNameStatus(false)
         }
 
         if (password.length === 0) {
             setPasswordStatus(true)
+            safeToLogin = safeToLogin && false
         } else {
             setPasswordStatus(false)
         }
+        setSafeToLogin(safeToLogin)
     }
 
     return (

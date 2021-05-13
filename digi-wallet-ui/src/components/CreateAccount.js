@@ -1,59 +1,77 @@
-import React, { useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import Box from '@material-ui/core/Box'
 import TextField from '@material-ui/core/TextField'
 import Button from '@material-ui/core/Button'
 import './create-account.css'
 
-export default function CreateAccount() {
+export default function CreateAccount(props) {
 
     const [usernameErrorStatus, setUsernameErrorStatus] = useState(false)
     const [emailErrorStatus, setEmailErrorStatus] = useState(false)
     const [passwordErrorStatus, setPasswordErrorStatus] = useState(false)
     const [confirmPasswordErrorStatus, setConfirmPasswordErrorStatus] = useState(false)
+    const [safeToCreate, setSafeToCreate] = useState(false)
 
     const userNameRef = useRef()
     const emailRef = useRef()
     const passwordRef = useRef()
     const confirmPasswordRef = useRef()
 
-    function validateEmailFormat(email) {
-        if (!(/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(email))) {
-            setEmailErrorStatus(true)
+    useEffect(() => {
+        if (safeToCreate) {
+            const username = userNameRef.current.value
+            const email = emailRef.current.value
+            const password = passwordRef.current.value
+            if (username.length > 0 && email.length > 0 && password.length > 0) {
+                props.onCreate(username, email, password)
+            }
+            setSafeToCreate(false)
         }
+    })
+
+    function validateEmailFormat(email) {
+        return (/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(email))
     }
 
     function validate(username, email, password, confirmPassword) {
+        let safeToCreate = true
         if (username.length === 0) {
             setUsernameErrorStatus(true)
+            safeToCreate = safeToCreate && false
         } else {
             setUsernameErrorStatus(false) 
         }
 
         if (email.length === 0) {
             setEmailErrorStatus(true)
+            safeToCreate = safeToCreate && false
         } else {
             setEmailErrorStatus(false)
         }
 
         if (password.length === 0) {
             setPasswordErrorStatus(true)
+            safeToCreate = safeToCreate && false
         } else {
             setPasswordErrorStatus(false)
         }
 
         if (confirmPassword.length === 0) {
             setConfirmPasswordErrorStatus(true)
+            safeToCreate = safeToCreate && false
         } else {
             setConfirmPasswordErrorStatus(false)
         }
 
         if (password !== confirmPassword) {
             setConfirmPasswordErrorStatus(true)
+            
         }
-
-        if (!emailErrorStatus) {
-            validateEmailFormat(email)
+        if (!validateEmailFormat(email)) {
+            setEmailErrorStatus(true)
+            safeToCreate = safeToCreate && false
         }
+        setSafeToCreate(safeToCreate)
     }
 
     function onSubmit() {
