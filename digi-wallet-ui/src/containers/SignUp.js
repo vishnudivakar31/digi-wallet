@@ -3,18 +3,45 @@ import Box from '@material-ui/core/Box'
 import Login from '../components/Login'
 import CreateAccount from '../components/CreateAccount'
 import { geolocated } from 'react-geolocated'
-import { SIGNUP_URL } from '../util/Constants'
+import { SIGNUP_URL, LOGIN_URL } from '../util/Constants'
+import { instanceOf } from 'prop-types'
+import { withCookies, Cookies } from 'react-cookie'
+import { withRouter } from "react-router"
 import './signup.css'
 
 class SignUp extends Component {
+    static propTypes = {
+        cookies: instanceOf(Cookies).isRequired
+    }
+
     constructor(props) {
         super(props)
         this.onCreate = this.onCreate.bind(this)
         this.onLogin = this.onLogin.bind(this)
     }
 
-    onLogin(username, password) {
-        alert('on login')
+    async onLogin(username, password) {
+        const payload = {
+            username,
+            password
+        }
+
+        const requestOptions = {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify(payload)
+        }
+
+        const response = await fetch(LOGIN_URL, requestOptions)
+        if (!response.ok) {
+            alert(response.statusText)
+        } else {
+            const { cookies } = this.props
+            const data = await response.json()
+            const bearerToken = data['Authorization']
+            cookies.set('Authorization', bearerToken, { path: '/' })
+            this.props.history.push("/home")
+        }
     }
 
     async onCreate(username, email, password) {
@@ -71,4 +98,4 @@ export default geolocated({
         enableHighAccuracy: false
     },
     userDecisionTimeout: 5000
-})(SignUp)
+})(withCookies(withRouter(SignUp)))
