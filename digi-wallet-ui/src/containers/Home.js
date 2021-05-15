@@ -4,7 +4,12 @@ import { instanceOf } from 'prop-types'
 import { withRouter } from "react-router"
 import { withCookies, Cookies } from 'react-cookie'
 import { geolocated } from 'react-geolocated'
-import { ACCOUNT_URL, BALANCE_URL, ADD_MONEY_URL } from '../util/Constants'
+import { 
+    ACCOUNT_URL,
+    BALANCE_URL,
+    ADD_MONEY_URL,
+    CREATE_TRANSACTION 
+} from '../util/Constants'
 
 import './home.css'
 
@@ -23,6 +28,7 @@ class Home extends Component {
         this.fetchBalance = this.fetchBalance.bind(this)
         this.fetchRequest = this.fetchRequest.bind(this)
         this.addMoney = this.addMoney.bind(this)
+        this.createTransaction = this.createTransaction.bind(this)
         this.bearerToken = `Bearer ${this.props.cookies.cookies.Authorization}`
     }
 
@@ -39,6 +45,30 @@ class Home extends Component {
         const response = await fetch(`${ADD_MONEY_URL}?amount=${parseFloat(amount)}`, requestOptions)
         if (response.ok) {
             this.fetchBalance()
+        } else {
+            this.props.history.push("/")
+        }
+    }
+
+    async createTransaction(receiverID, amount) {
+        const latitude = this.props.coords.latitude
+        const longitude = this.props.coords.longitude
+
+        const payload = {
+            receiverID,
+            amount: parseFloat(amount),
+            latitude,
+            longitude
+        }
+
+        const requestOptions = {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json', 'Authorization': this.bearerToken},
+            body: JSON.stringify(payload)
+        }
+        const response = await fetch(CREATE_TRANSACTION, requestOptions)
+        if (response.ok) {
+            alert('transaction created.')
         } else {
             this.props.history.push("/")
         }
@@ -79,6 +109,7 @@ class Home extends Component {
                     accountID={this.state.account.id}
                     balance={this.state.balance.balance}
                     addMoney={this.addMoney}
+                    createTransaction={this.createTransaction}
                 />
             </div>
         )
