@@ -1,0 +1,57 @@
+.left-pane {
+    width: 25%;
+    height: 100%;
+    background: #192a56;
+    padding: 2% 3%;
+    color: white;
+}
+
+.left-pane-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.company-logo {
+    font-family: fantasy;
+    font-size: xx-large;
+    font-weight: bolder;
+}
+
+.user-balance {
+    margin-top: 3vh;
+}
+
+.user-balance-info {
+    font-size: x-large;
+}
+
+.left-pane-textfield {
+    margin-top: 2% !important;
+}
+
+.account-number {
+    font-size: x-large;
+    margin-top: 2%;
+    color: whitesmoke;
+}
+
+.left-pane-textfield .MuiOutlinedInput-root {
+    background: white !important;
+}
+
+.user-balance-amt {
+    font-size: xx-large;
+    margin-top: 2%;
+    color: #c23616;
+    font-weight: bolder;
+}
+
+.transact-container {
+    margin-top: 5%;
+    margin-bottom: 5%;
+}
+
+.left-pane-button {
+    margin-top: 2% !important;
+}
