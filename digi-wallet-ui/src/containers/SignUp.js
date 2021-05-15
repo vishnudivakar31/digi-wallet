@@ -38,7 +38,7 @@ class SignUp extends Component {
         } else {
             const { cookies } = this.props
             const data = await response.json()
-            const bearerToken = data['Authorization']
+            const bearerToken = data['Authorization'].replace('Bearer ', '')
             cookies.set('Authorization', bearerToken, { path: '/' })
             this.props.history.push("/home")
         }
