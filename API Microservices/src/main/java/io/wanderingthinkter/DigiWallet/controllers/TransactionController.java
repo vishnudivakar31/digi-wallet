@@ -54,11 +54,11 @@ public class TransactionController {
     }
 
     @PostMapping("/add_money")
-    public Account addAmountToAccount(@RequestParam Long amount, Principal principal) {
+    public Account addAmountToAccount(@RequestParam String amount, Principal principal) {
         Optional<AppUser> optionalAppUser = appUserService.findByPrincipal(principal);
         if (optionalAppUser.isPresent()) {
             AppUser appUser = optionalAppUser.get();
-            return transactionService.addAmountToAccount(amount, appUser.getId());
+            return transactionService.addAmountToAccount(Long.parseLong(amount), appUser.getId());
         } else {
             throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "user not found");
         }

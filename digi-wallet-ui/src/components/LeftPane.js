@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useRef, useState } from 'react'
 import TextField from '@material-ui/core/TextField'
 import Button from '@material-ui/core/Button'
 import './left-pane.css'
@@ -6,6 +6,19 @@ import './left-pane.css'
 export default function LeftPane(props) {
 
     const {username, accountID, balance} = props
+    const [addMoneyErrorStatus, setAddMoneyErrorStatus] = useState(false)
+
+    const addMoneyTxtRef = useRef()
+
+    const onAddMoney = () => {
+        const amount = addMoneyTxtRef.current.value
+        if (amount === undefined || amount.length === 0) {
+            setAddMoneyErrorStatus(true)
+        } else {
+            props.addMoney(amount)
+            addMoneyTxtRef.current.value = ''
+        }
+    }
 
     return (
         <div className='left-pane'>
@@ -55,9 +68,11 @@ export default function LeftPane(props) {
                     variant="outlined"
                     size='small'
                     className='left-pane-textfield'
+                    error={addMoneyErrorStatus}
+                    inputRef={addMoneyTxtRef}
                     fullWidth
                 />
-                <Button variant="contained" color="primary" fullWidth className='left-pane-button'>
+                <Button variant="contained" color="primary" fullWidth className='left-pane-button' onClick={onAddMoney}>
                     Add
                 </Button>
             </div>

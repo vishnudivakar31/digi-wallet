@@ -4,7 +4,7 @@ import { instanceOf } from 'prop-types'
 import { withRouter } from "react-router"
 import { withCookies, Cookies } from 'react-cookie'
 import { geolocated } from 'react-geolocated'
-import { ACCOUNT_URL, BALANCE_URL } from '../util/Constants'
+import { ACCOUNT_URL, BALANCE_URL, ADD_MONEY_URL } from '../util/Constants'
 
 import './home.css'
 
@@ -22,12 +22,26 @@ class Home extends Component {
         this.fetchAccount = this.fetchAccount.bind(this)
         this.fetchBalance = this.fetchBalance.bind(this)
         this.fetchRequest = this.fetchRequest.bind(this)
+        this.addMoney = this.addMoney.bind(this)
         this.bearerToken = `Bearer ${this.props.cookies.cookies.Authorization}`
     }
 
     componentDidMount() {
         this.fetchAccount()
         this.fetchBalance()
+    }
+
+    async addMoney(amount) {
+        const requestOptions = {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json', 'Authorization': this.bearerToken}
+        }
+        const response = await fetch(`${ADD_MONEY_URL}?amount=${parseFloat(amount)}`, requestOptions)
+        if (response.ok) {
+            this.fetchBalance()
+        } else {
+            this.props.history.push("/")
+        }
     }
 
     async fetchAccount() {
@@ -64,6 +78,7 @@ class Home extends Component {
                     username={this.state.account.username}
                     accountID={this.state.account.id}
                     balance={this.state.balance.balance}
+                    addMoney={this.addMoney}
                 />
             </div>
         )
