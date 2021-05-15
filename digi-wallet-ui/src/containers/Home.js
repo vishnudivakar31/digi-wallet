@@ -29,6 +29,7 @@ class Home extends Component {
         this.fetchRequest = this.fetchRequest.bind(this)
         this.addMoney = this.addMoney.bind(this)
         this.createTransaction = this.createTransaction.bind(this)
+        this.logout = this.logout.bind(this)
         this.bearerToken = `Bearer ${this.props.cookies.cookies.Authorization}`
     }
 
@@ -101,6 +102,12 @@ class Home extends Component {
         }
     }
 
+    logout() {
+        const { cookies } = this.props
+        cookies.set('Authorization', '', { path: '/' })
+        this.props.history.push("/")
+    }
+
     render() {
         return(
             <div className='home'>
@@ -110,6 +117,7 @@ class Home extends Component {
                     balance={this.state.balance.balance}
                     addMoney={this.addMoney}
                     createTransaction={this.createTransaction}
+                    logout={this.logout}
                 />
             </div>
         )

@@ -121,7 +121,7 @@ export default function LeftPane(props) {
             </div>
 
             <div className='transact-container'>
-                <Button color="secondary">Logout</Button>
+                <Button color="secondary" onClick={props.logout}>Logout</Button>
             </div>
         </div>
     )
