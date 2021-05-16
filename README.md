@@ -14,3 +14,12 @@
   <img src="https://img.shields.io/badge/Postgres-blue" />
   <img src="https://img.shields.io/badge/Docker-important" />
 </p>
+
+<h3>Description</h3>
+<p align='justify'>
+  Developed as a part of distributed systems course. Micro-services are developed
+  to use Kafka as a distributed message service. User can create account and login
+  to the platform. Using spring security, platform generates JWT for API authentication.
+  User can add money, transact money, view transactions and cancel pending transactions
+  from home page.
+</p>
