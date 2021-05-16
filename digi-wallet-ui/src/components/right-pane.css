@@ -1,0 +1,10 @@
+.right-pane {
+    width: max-content;
+    padding: 2%;
+}
+
+.title {
+    font-size: xx-large;
+    font-weight: bolder;
+    margin-bottom: 1%;
+}

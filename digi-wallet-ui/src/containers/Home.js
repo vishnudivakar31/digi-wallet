@@ -4,11 +4,14 @@ import { instanceOf } from 'prop-types'
 import { withRouter } from "react-router"
 import { withCookies, Cookies } from 'react-cookie'
 import { geolocated } from 'react-geolocated'
+import RightPane from '../components/RightPane'
 import { 
     ACCOUNT_URL,
     BALANCE_URL,
     ADD_MONEY_URL,
-    CREATE_TRANSACTION 
+    CREATE_TRANSACTION,
+    FETCH_TRANSACTIONS,
+    CANCEL_TRANSACTION
 } from '../util/Constants'
 
 import './home.css'
@@ -22,20 +25,51 @@ class Home extends Component {
         super(props)
         this.state = {
             balance: {},
-            account: {}
+            account: {},
+            transactions: []
         }
         this.fetchAccount = this.fetchAccount.bind(this)
         this.fetchBalance = this.fetchBalance.bind(this)
         this.fetchRequest = this.fetchRequest.bind(this)
+        this.fetchAllTransactions = this.fetchAllTransactions.bind(this)
+        this.cancelTransaction = this.cancelTransaction.bind(this)
         this.addMoney = this.addMoney.bind(this)
         this.createTransaction = this.createTransaction.bind(this)
         this.logout = this.logout.bind(this)
         this.bearerToken = `Bearer ${this.props.cookies.cookies.Authorization}`
     }
 
-    componentDidMount() {
-        this.fetchAccount()
-        this.fetchBalance()
+    async componentDidMount() {
+        await this.fetchAccount()
+        await this.fetchBalance()
+        await this.fetchAllTransactions()
+    }
+
+    async cancelTransaction(id) {
+        const requestOptions = {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json', 'Authorization': this.bearerToken}
+        }
+        const response = await fetch(`${CANCEL_TRANSACTION}${id}/cancel`, requestOptions)
+        if (response.ok) {
+            await this.fetchAllTransactions()
+        } else {
+            this.props.history.push("/")
+        }
+    }
+
+    async fetchAllTransactions() {
+        let transactions = await this.fetchRequest(FETCH_TRANSACTIONS)
+        transactions = transactions.map(transaction => {
+            return {
+                ...transaction,
+                transaction_type: transaction.senderID === this.state.account.id ? 'Send' : 'Receive',
+                action: (transaction.transaction_status === 'PENDING' || transaction.transaction_status === 'FRAUD_DETECTED') && transaction.senderID === this.state.account.id
+            }
+        })
+        this.setState({
+            transactions
+        })
     }
 
     async addMoney(amount) {
@@ -70,6 +104,7 @@ class Home extends Component {
         const response = await fetch(CREATE_TRANSACTION, requestOptions)
         if (response.ok) {
             alert('transaction created.')
+            await this.fetchAllTransactions()
         } else {
             this.props.history.push("/")
         }
@@ -118,6 +153,10 @@ class Home extends Component {
                     addMoney={this.addMoney}
                     createTransaction={this.createTransaction}
                     logout={this.logout}
+                />
+                <RightPane 
+                    tableData={this.state.transactions}
+                    cancelTransaction={this.cancelTransaction}
                 />
             </div>
         )
