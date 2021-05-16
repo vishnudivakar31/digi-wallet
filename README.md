@@ -6,8 +6,8 @@
   <img src="https://img.shields.io/badge/Distributed-Systems-yellow" />
 </p>
 
+<h3>Tech Stack</h3>
 <p align="center">
-  <h3>Tech Stack</h3>
   <img src="https://img.shields.io/badge/Java-orange" />
   <img src="https://img.shields.io/badge/React-green" />
   <img src="https://img.shields.io/badge/Kafka-yellow" />
