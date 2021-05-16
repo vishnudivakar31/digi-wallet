@@ -12,4 +12,5 @@
   <img src="https://img.shields.io/badge/React-green" />
   <img src="https://img.shields.io/badge/Kafka-yellow" />
   <img src="https://img.shields.io/badge/Postgres-blue" />
+  <img src="https://img.shields.io/badge/Docker-important" />
 </p>
