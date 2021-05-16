@@ -36,6 +36,6 @@
 <h4>Home Page</h4>
 <div>
   <p align='justify'>
-    <img src=https://github.com/vishnudivakar31/digi-wallet/blob/main/screenshots/home_screen.png" />
+    <img src="https://github.com/vishnudivakar31/digi-wallet/blob/main/screenshots/home_screen.png" />
   </p>
 </div>
