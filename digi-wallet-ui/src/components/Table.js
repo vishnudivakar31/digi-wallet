@@ -21,7 +21,7 @@ export default function Table(props) {
         nextPage,
         previousPage,
         state: { pageIndex }
-      } = useTable({ columns, data, initialState: { pageIndex: 0, pageSize: 20 } }, usePagination)
+      } = useTable({ columns, data, initialState: { pageIndex: 0, pageSize: 14 } }, usePagination)
 
     return (
         <div>

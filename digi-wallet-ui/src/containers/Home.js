@@ -43,6 +43,16 @@ class Home extends Component {
         await this.fetchAccount()
         await this.fetchBalance()
         await this.fetchAllTransactions()
+        this.intervalTimer = setInterval(async () => {
+            await this.fetchBalance()
+            await this.fetchAllTransactions()
+        }, 600000)
+    }
+
+    componentWillUnmount() {
+        if (this.intervalTimer) {
+            clearInterval(this.intervalTimer)
+        }
     }
 
     async cancelTransaction(id) {
