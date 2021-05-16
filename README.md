@@ -39,3 +39,24 @@
     <img src="https://github.com/vishnudivakar31/digi-wallet/blob/main/screenshots/home_screen.png" />
   </p>
 </div>
+
+<h4>Zookeeper Server/Kafka Servers</h4>
+<div>
+  <p align='justify'>
+    <img src="https://github.com/vishnudivakar31/digi-wallet/blob/main/screenshots/kafka-servers.png" />
+  </p>
+</div>
+
+<h4>Fraud Detection Microservices/Kafka Consumer</h4>
+<div>
+  <p align='justify'>
+    <img src="https://github.com/vishnudivakar31/digi-wallet/blob/main/screenshots/fraud-detection-micro-services.png" />
+  </p>
+</div>
+
+<h4>Transaction auto approval cron job. (Approval after 24 hrs)</h4>
+<div>
+  <p align='justify'>
+    <img src="https://github.com/vishnudivakar31/digi-wallet/blob/main/screenshots/auto-transaction-approved-job.png" />
+  </p>
+</div>
