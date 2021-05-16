@@ -23,3 +23,19 @@
   User can add money, transact money, view transactions and cancel pending transactions
   from home page.
 </p>
+
+<h3>Screenshots</h3>
+
+<h4>Login/SignUp Page</h4>
+<div>
+  <p align='justify'>
+    <img src="https://github.com/vishnudivakar31/digi-wallet/blob/main/screenshots/login_screen.png" />
+  </p>
+</div>
+
+<h4>Home Page</h4>
+<div>
+  <p align='justify'>
+    <img src=https://github.com/vishnudivakar31/digi-wallet/blob/main/screenshots/home_screen.png" />
+  </p>
+</div>
