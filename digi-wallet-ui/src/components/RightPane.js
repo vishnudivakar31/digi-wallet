@@ -2,10 +2,19 @@ import React from 'react'
 import Table from './Table'
 import Button from '@material-ui/core/Button'
 import moment from 'moment'
+import CallMadeIcon from '@material-ui/icons/CallMade';
+import CallReceivedIcon from '@material-ui/icons/CallReceived';
 
 import './right-pane.css'
 
 export default function RightPane(props) {
+    const pendingTransaction = props.tableData.filter(transaction => transaction.transaction_status === 'PENDING' || transaction.transaction_status === 'FRAUD_DETECTED')
+    const pendingSendAmt = pendingTransaction
+                        .filter(trans => trans.transaction_type === 'Send')
+                        .reduce((init, t) => init + t.amount, 0)
+    const pendingReceiveAmt = pendingTransaction
+                        .filter(trans => trans.transaction_type === 'Receive')
+                        .reduce((init, t) => init + t.amount, 0)
     const tableData = props.tableData
     const columns = [
         {
@@ -98,9 +107,24 @@ export default function RightPane(props) {
             }
         }
     ]
+
     return (
         <div className='right-pane'>
-            <div className='title'>Transactions</div>
+            <div className='right-pane-title-container'>
+                <div className='title'>Transactions</div>
+                <div className='pending-pane'>
+                    <div className='pending-title'>Pending:</div>
+                    <div className='pending-item send'>
+                        <CallMadeIcon />
+                        ${pendingSendAmt}
+                    </div>
+                    <div className='pending-item receive'>
+                        <CallReceivedIcon />
+                        ${pendingReceiveAmt}
+                    </div>
+                </div>
+            </div>
+            
             <Table
                 tableData={tableData}
                 tableColumns={columns}

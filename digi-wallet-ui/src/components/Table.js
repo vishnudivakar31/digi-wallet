@@ -20,9 +20,8 @@ export default function Table(props) {
         gotoPage,
         nextPage,
         previousPage,
-        setPageSize,
-        state: { pageIndex, pageSize }
-      } = useTable({ columns, data, initialState: { pageIndex: 0 } }, usePagination)
+        state: { pageIndex }
+      } = useTable({ columns, data, initialState: { pageIndex: 0, pageSize: 20 } }, usePagination)
 
     return (
         <div>
@@ -34,11 +33,13 @@ export default function Table(props) {
                         <th 
                             {...column.getHeaderProps()}
                             style={{
-                                padding: '1% 0.5%',
+                                padding: '10px 15px',
                                 background: '#192a56',
                                 color: 'white',
                                 fontWeight: 'bold',
-                                whiteSpace: 'nowrap'
+                                whiteSpace: 'nowrap',
+                                textAlign: 'center',
+                                fontSize: '16px'
                             }}
                         >
                             {column.render('Header')}
@@ -57,9 +58,10 @@ export default function Table(props) {
                                 <td 
                                     {...cell.getCellProps()}
                                     style={{
-                                        padding: '1% 0.5%',
+                                        padding: '10px 15px',
                                         background: '#dfe4ea',
-                                        textAlign: 'center'
+                                        textAlign: 'center',
+                                        fontSize: '14px'
                                     }}
                                 >
                                     {cell.render('Cell')}
@@ -101,19 +103,7 @@ export default function Table(props) {
                     }}
                     style={{ width: '100px' }}
                 />
-                </span>{' '}
-                <select
-                value={pageSize}
-                onChange={e => {
-                    setPageSize(Number(e.target.value))
-                }}
-                >
-                {[10, 20, 30, 40, 50].map(pageSize => (
-                    <option key={pageSize} value={pageSize}>
-                    Show {pageSize}
-                    </option>
-                ))}
-                </select>
+                </span>
             </div>
         </div>
     )

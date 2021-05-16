@@ -1,10 +1,44 @@
 .right-pane {
-    width: max-content;
-    padding: 2%;
+    padding: 1%;
+    max-width: 80% !important;
 }
 
 .title {
     font-size: xx-large;
     font-weight: bolder;
     margin-bottom: 1%;
+}
+
+.right-pane-title-container {
+    display: flex;
+    align-items: center;
+}
+
+.pending-pane {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    font-size: small;
+    margin-left: 2%;
+}
+
+
+.pending-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    margin-right: 2% !important;
+}
+
+.pending-item.send {
+    color: #833471;
+}
+
+.pending-item.receive {
+    color: #009432;
+}
+
+.pending-title {
+    font-style: italic;
+    color: #a4b0be;
 }

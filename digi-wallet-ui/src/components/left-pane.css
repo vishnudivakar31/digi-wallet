@@ -1,8 +1,8 @@
 .left-pane {
-    width: 25%;
+    max-width: 21% !important;;
     height: 100%;
     background: #192a56;
-    padding: 2% 3%;
+    padding: 1%;
     color: white;
 }
 
