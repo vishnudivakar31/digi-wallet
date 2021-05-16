@@ -16,14 +16,16 @@ export default function CreateAccount(props) {
     const emailRef = useRef()
     const passwordRef = useRef()
     const confirmPasswordRef = useRef()
+    const selectRef = useRef()
 
     useEffect(() => {
         if (safeToCreate) {
             const username = userNameRef.current.value
             const email = emailRef.current.value
             const password = passwordRef.current.value
+            const accountType = selectRef.current.value
             if (username.length > 0 && email.length > 0 && password.length > 0) {
-                props.onCreate(username, email, password)
+                props.onCreate(username, email, password, accountType)
             }
             setSafeToCreate(false)
         }
